@@ -33,7 +33,7 @@ public class PlayerShoot : MonoBehaviour
     public void Fire()
     {
         GameObject bullet = Instantiate(bulletPrefab,transform.position, Quaternion.identity) as GameObject;
-        Physics.IgnoreCollision(bullet.GetComponent<Collider>(), bulletSpawn.parent.GetComponent<Collider>());
+        //Physics.IgnoreCollision(bullet.GetComponent<Collider>(), bulletSpawn.parent.GetComponent<Collider>());
         bullet.transform.position = bulletSpawn.position;
         bullet.GetComponent<Rigidbody>().AddForce(bulletSpawn.forward * bulletSpeed);
     }
