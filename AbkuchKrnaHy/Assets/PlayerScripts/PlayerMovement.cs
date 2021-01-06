@@ -84,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         Move(h, v);
 
         // Turn the player to face the mouse cursor.
-        Turning();
+       // Turning();
 
         // Animate the player.
         //Animating(h, v);

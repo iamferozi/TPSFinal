@@ -47,7 +47,7 @@ public class Teleportation : MonoBehaviour
 
     public void Dash()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             Vector3 newPos = new Vector3(0f, 0f, (playerPos.position.z + 2f));
             playerPos.transform.position = newPos;
