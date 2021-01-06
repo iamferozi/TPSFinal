@@ -34,20 +34,20 @@ public class RandomSpawn : MonoBehaviour {
         //zRan = Random.Range(zMin, zMax);
 
         //commented
-        //for (int j = 0; j < numberofSpawns; j++)
-        //{
-        //    for (int i = 0; i < Objects.Length; i++)
-        //    {
-        //        //Debug.LogError("barrels");
-        //        Instantiate(Objects[i], new Vector3 (
-        //        Random.Range(xMin, xMax),
-        //        Random.Range(yMin, yMax),
-        //        Random.Range(zMin, zMax)),
-        //        Quaternion.identity);
-        //    }
-        //}
+        for (int j = 0; j < numberofSpawns; j++)
+        {
+            for (int i = 0; i < Objects.Length; i++)
+            {
+                //Debug.LogError("barrels");
+                Instantiate(Objects[i], new Vector3(
+                Random.Range(xMin, xMax),
+                Random.Range(yMin, yMax),
+                Random.Range(zMin, zMax)),
+                Quaternion.identity);
+            }
+        }
 
-        StartCoroutine(EnemySpawnDelay());
+        //StartCoroutine(EnemySpawnDelay());
     }
 
     IEnumerator EnemySpawnDelay()
