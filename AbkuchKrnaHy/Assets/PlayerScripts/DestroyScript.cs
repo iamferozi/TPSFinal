@@ -4,11 +4,24 @@ using UnityEngine;
 
 public class DestroyScript : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.gameObject.tag == "Bullet")
+    //    {
+    //        Destroy(other.gameObject);
+    //    }
+    //}
+    
+
+    private void Start()
     {
-        if (other.gameObject.tag == "Bullet")
+        
+    }
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.V))
         {
-            Destroy(other.gameObject);
+            Destroy(this.gameObject);
         }
     }
 }

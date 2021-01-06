@@ -17,6 +17,7 @@ public class RandomSpawn : MonoBehaviour {
     public float zMax;
 
     public int numberofSpawns;
+    public float spawnDelay;
     //public float xRan;
     //public float yRan;
     //public float zRan;
@@ -31,19 +32,38 @@ public class RandomSpawn : MonoBehaviour {
         //xRan = Random.Range(xMin, xMax);
         //yRan = Random.Range(yMin, yMax);
         //zRan = Random.Range(zMin, zMax);
+
+        //commented
+        //for (int j = 0; j < numberofSpawns; j++)
+        //{
+        //    for (int i = 0; i < Objects.Length; i++)
+        //    {
+        //        //Debug.LogError("barrels");
+        //        Instantiate(Objects[i], new Vector3 (
+        //        Random.Range(xMin, xMax),
+        //        Random.Range(yMin, yMax),
+        //        Random.Range(zMin, zMax)),
+        //        Quaternion.identity);
+        //    }
+        //}
+
+        StartCoroutine(EnemySpawnDelay());
+    }
+
+    IEnumerator EnemySpawnDelay()
+    {
         for (int j = 0; j < numberofSpawns; j++)
         {
-            for (int i = 0; i < Objects.Length; i++)
-            {
+            //for (int i = 0; i < Objects.Length; i++)
+            //{
                 //Debug.LogError("barrels");
-                Instantiate(Objects[i], new Vector3 (
+                Instantiate(Objects[Random.Range(0,2)], new Vector3(
                 Random.Range(xMin, xMax),
                 Random.Range(yMin, yMax),
                 Random.Range(zMin, zMax)),
                 Quaternion.identity);
-            }
+                yield return new WaitForSecondsRealtime(spawnDelay);
+            //}
         }
-
-
     }
 }
