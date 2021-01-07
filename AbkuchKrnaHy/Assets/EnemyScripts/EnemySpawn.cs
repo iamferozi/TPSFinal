@@ -1,10 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemySpawn : MonoBehaviour {
 
-    public GameObject[] Objects;
+    public GameObject[] enemy;
 
     [Header("Axis Minimum")]
     public float xMin;
@@ -22,42 +23,69 @@ public class EnemySpawn : MonoBehaviour {
     //public float yRan;
     //public float zRan;
 
+    public int timeBetweenNextWave;
+    public Text timer;
+    public bool takingAway = false;
+    public bool stopSpawning;
+
     // Use this for initialization
-    void Start () {
-        SpawnRandomObjects();
+    void Start () 
+    {
+        timer.text = timeBetweenNextWave.ToString();
+        InvokeRepeating("SpawnRandomenemy", timeBetweenNextWave, timeBetweenNextWave);
+        //InvokeRepeating("Timer",1, timeBetweenNextWave);
+        //SpawnRandomenemy();
 	}
 
-    public void SpawnRandomObjects()
+    private void Update()
+    {
+        Timer();
+    }
+
+    public void Timer()
+    {
+        if (takingAway == false && timeBetweenNextWave > 0)
+        {
+            StartCoroutine(SpawnerTimer());
+        }
+    }
+
+    public void SpawnRandomenemy()
     {
         //xRan = Random.Range(xMin, xMax);
         //yRan = Random.Range(yMin, yMax);
         //zRan = Random.Range(zMin, zMax);
 
         //commented
-        //for (int j = 0; j < numberofSpawns; j++)
-        //{
-        //    for (int i = 0; i < Objects.Length; i++)
-        //    {
-        //        //Debug.LogError("barrels");
-        //        Instantiate(Objects[i], new Vector3 (
-        //        Random.Range(xMin, xMax),
-        //        Random.Range(yMin, yMax),
-        //        Random.Range(zMin, zMax)),
-        //        Quaternion.identity);
-        //    }
-        //}
+        for (int j = 0; j < numberofSpawns; j++)
+        {
+            for (int i = 0; i < enemy.Length; i++)
+            {
+                //Debug.LogError("barrels");
+                Instantiate(enemy[i], new Vector3(
+                Random.Range(xMin, xMax),
+                Random.Range(yMin, yMax),
+                Random.Range(zMin, zMax)),
+                Quaternion.identity);
+            }
+        }
 
-        StartCoroutine(EnemySpawnDelay());
+
+        //StartCoroutine(EnemySpawnDelay());
+        if (stopSpawning == true)
+        {
+            CancelInvoke("SpawnRandomenemy");
+        }
     }
 
     IEnumerator EnemySpawnDelay()
     {
         for (int j = 0; j < numberofSpawns; j++)
         {
-            //for (int i = 0; i < Objects.Length; i++)
+            //for (int i = 0; i < enemy.Length; i++)
             //{
                 //Debug.LogError("barrels");
-                Instantiate(Objects[Random.Range(0,2)], new Vector3(
+                Instantiate(enemy[Random.Range(0,1)], new Vector3(
                 Random.Range(xMin, xMax),
                 Random.Range(yMin, yMax),
                 Random.Range(zMin, zMax)),
@@ -65,5 +93,22 @@ public class EnemySpawn : MonoBehaviour {
                 yield return new WaitForSecondsRealtime(spawnDelay);
             //}
         }
+    }
+
+    IEnumerator SpawnerTimer()
+    {
+        takingAway = true;
+        yield return new WaitForSecondsRealtime(1);
+        timeBetweenNextWave -= 1;
+        //if (timeBetweenNextWave < 10)
+        //{
+        //    timer.text = "00:0" + timeBetweenNextWave;
+        //}
+        //else
+        //{
+        //    timer.text =  "00:" + timeBetweenNextWave;
+        //}
+        timer.text = timeBetweenNextWave.ToString();
+        takingAway = false;
     }
 }
